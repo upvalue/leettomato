@@ -1,4 +1,4 @@
-# CodeKata
+# LeetTomato
 
 A client-side web app for deliberate coding interview practice. Track timed
 sessions, look up LeetCode problems, grade yourself, and export to
@@ -79,15 +79,11 @@ pnpm preview
 
 ## Deployment
 
-Deploy to Cloudflare Pages:
+Deploys automatically to GitHub Pages on push to `main`.
 
-```bash
-# Deploy to production
-pnpm deploy
-
-# Deploy to preview
-pnpm deploy:preview
-```
+To enable:
+1. Go to repo Settings → Pages
+2. Set Source to "GitHub Actions"
 
 ## Tech Stack
 

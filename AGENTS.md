@@ -1,4 +1,4 @@
-# CodeKata - Architecture Guide
+# LeetTomato - Architecture Guide
 
 ## Overview
 

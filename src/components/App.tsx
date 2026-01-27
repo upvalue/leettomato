@@ -156,7 +156,7 @@ export function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6">
-      <h1 className="text-2xl text-tn-fg mb-4">CodeKata</h1>
+      <h1 className="text-2xl text-tn-fg mb-4">LeetTomato</h1>
 
       {(phase === 'idle' || phase === 'ready') && (
         <div className="flex flex-col items-center gap-6 w-full">
