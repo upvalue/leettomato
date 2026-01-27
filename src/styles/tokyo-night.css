@@ -1,0 +1,18 @@
+:root {
+  --bg-main: #1a1b26;
+  --bg-highlight: #283457;
+  --fg-main: #c0caf5;
+  --fg-muted: #565f89;
+  --color-red: #f7768e;
+  --color-green: #9ece6a;
+  --color-yellow: #e0af68;
+  --color-blue: #7aa2f7;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--fg-main);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  margin: 0;
+  padding: 0;
+}
