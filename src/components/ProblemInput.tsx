@@ -112,9 +112,6 @@ export function ProblemInput({ onSelect, disabled }: ProblemInputProps) {
                 </span>
                 <DifficultyBadge difficulty={problem.difficulty} />
               </div>
-              <div className="text-xs text-tn-muted mt-1">
-                {problem.topics.slice(0, 3).join(', ')}
-              </div>
             </button>
           ))}
 
@@ -147,11 +144,6 @@ export function ProblemInput({ onSelect, disabled }: ProblemInputProps) {
             </span>
             <DifficultyBadge difficulty={selectedProblem.difficulty} />
           </div>
-          {selectedProblem.topics.length > 0 && (
-            <div className="text-xs text-tn-muted mt-1">
-              {selectedProblem.topics.join(', ')}
-            </div>
-          )}
           {selectedProblem.url && (
             <a
               href={selectedProblem.url}
