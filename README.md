@@ -1,6 +1,10 @@
 # CodeKata
 
-A client-side web app for deliberate coding interview practice. Track timed sessions, look up LeetCode problems, grade yourself, and export to spreadsheets.
+A client-side web app for deliberate coding interview practice. Track timed
+sessions, look up LeetCode problems, grade yourself, and export to
+spreadsheets.
+
+100% vibe coded in an hour approach with caution.
 
 ## Features
 
@@ -76,8 +80,14 @@ pnpm preview
 ## Deployment
 
 Deploy to Cloudflare Pages:
-- Build command: `pnpm run build`
-- Output directory: `dist`
+
+```bash
+# Deploy to production
+pnpm deploy
+
+# Deploy to preview
+pnpm deploy:preview
+```
 
 ## Tech Stack
 
@@ -85,3 +95,11 @@ Deploy to Cloudflare Pages:
 - Vite
 - Tailwind CSS
 - localStorage for session history
+
+## Data Source
+
+LeetCode problem database from [mcaupybugs/leetcode-problems-db](https://github.com/mcaupybugs/leetcode-problems-db).
+
+To update the problem database:
+1. Download `merged_problems.json` from the repo above
+2. Run `node compress-db.js` to generate `src/data/problems.json`

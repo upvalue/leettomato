@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+/**
+ * Compresses the LeetCode problems database for use in the app.
+ *
+ * Source data: https://github.com/mcaupybugs/leetcode-problems-db
+ * Download merged_problems.json from that repo, then run this script.
+ */
 const fs = require('fs');
 
 const data = JSON.parse(fs.readFileSync('merged_problems.json', 'utf8'));
