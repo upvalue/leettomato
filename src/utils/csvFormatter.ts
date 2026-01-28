@@ -1,5 +1,5 @@
 import { SessionData } from '../types';
-import { formatTime } from './timeFormatter';
+import { formatTimeForExport } from './timeFormatter';
 
 function getDifficultyLabel(d: 'E' | 'M' | 'H' | null): string {
   if (d === null) return '';
@@ -29,9 +29,9 @@ export function formatSessionAsCsv(session: SessionData): string {
     formatProblemName(problem),
     problem.url || '',
     getDifficultyLabel(problem.difficulty),
-    formatTime(designTime),
-    formatTime(codingTime),
-    formatTime(totalTime),
+    formatTimeForExport(designTime),
+    formatTimeForExport(codingTime),
+    formatTimeForExport(totalTime),
     designOverThreshold ? 'Y' : 'N',
     codingOverThreshold ? 'Y' : 'N',
     grade !== null ? grade.toString() : '',
