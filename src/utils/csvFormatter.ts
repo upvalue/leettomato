@@ -42,6 +42,29 @@ export function formatSessionAsCsv(session: SessionData): string {
   return columns.join('\t');
 }
 
+export function formatHistoryEntryAsCsv(entry: import('../types').HistoryEntry): string {
+  const problemName = entry.isLeetCode && entry.problemId
+    ? `Leetcode ${entry.problemId} ${entry.problemTitle}`
+    : entry.problemTitle;
+
+  const columns = [
+    entry.date,
+    problemName,
+    '', // url not stored in history
+    getDifficultyLabel(entry.difficulty),
+    formatTimeForExport(entry.designTime),
+    formatTimeForExport(entry.codingTime),
+    formatTimeForExport(entry.totalTime),
+    '', // designOverThreshold not stored
+    '', // codingOverThreshold not stored
+    entry.grade !== null ? entry.grade.toString() : '',
+    '', // topics not stored in history
+    sanitizeForTsv(entry.notes),
+  ];
+
+  return columns.join('\t');
+}
+
 export function getCsvHeader(): string {
   return [
     'Date',

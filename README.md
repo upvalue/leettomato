@@ -10,11 +10,17 @@ spreadsheets.
 
 - **Problem Lookup**: Search LeetCode problems by URL, number, or name with autocomplete
 - **Custom Problems**: Enter any problem name for non-LeetCode practice
-- **Timed Phases**: Design phase (10 min target) and Coding phase (20 min target)
+- **Timed Phases**: Design phase and Coding phase with configurable time thresholds
+- **Recording Indicator**: Pulsing red dot shows when timer is actively running
 - **Visual Warnings**: Timer turns red when exceeding time thresholds
+- **Add Time Offset**: Add elapsed time before or during a session (e.g. started on paper first)
+- **Custom Thresholds**: Configure design/coding time limits via Settings panel (persisted in localStorage)
+- **Sound Effects**: Optional 8-bit sound effects for start, threshold warning, and session complete (opt-in via Settings)
 - **Self-Grading**: Rate yourself 1-4 with optional notes
 - **CSV Export**: Copy tab-separated data for pasting into spreadsheets
+- **History Clipboard**: Copy any past session's data from the history table
 - **Session History**: View recent sessions stored in localStorage
+- **Stable Layout**: UI elements reserve space to prevent layout shifts during state changes
 - **Tokyo Night Theme**: Dark theme optimized for focused practice
 
 ## Usage
@@ -27,13 +33,16 @@ spreadsheets.
 
 2. **Design Phase**
    - Click "Start Design Phase" to begin
+   - Timer starts paused — optionally add already-elapsed time via "Add time" inputs
+   - Click "Start" to begin timing; a red recording dot indicates the timer is running
    - Plan your approach, identify data structures, time/space complexity
-   - Timer turns red after 10 minutes
+   - Timer turns red when exceeding the configured threshold (default 10 min)
    - Click "Start Coding" when ready
 
 3. **Coding Phase**
+   - Timer starts paused — optionally add time offset
    - Implement your solution
-   - Timer turns red after 20 minutes
+   - Timer turns red when exceeding the configured threshold (default 20 min)
    - Click "Complete" when finished
 
 4. **Self-Grading**
@@ -44,6 +53,7 @@ spreadsheets.
    - View session summary with times and grade
    - Click "Copy to Clipboard" to copy CSV data
    - Paste into Google Sheets or Excel
+   - Past sessions in the history table also have a clipboard button for copying
 
 ## CSV Output Format
 
@@ -90,7 +100,8 @@ To enable:
 - React 18 + TypeScript
 - Vite
 - Tailwind CSS
-- localStorage for session history
+- Heroicons (icons)
+- localStorage for session history and settings
 
 ## Data Source
 

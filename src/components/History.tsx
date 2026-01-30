@@ -1,5 +1,8 @@
+import { useState } from 'react';
+import { ClipboardDocumentIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { HistoryEntry } from '../types';
 import { formatTime } from '../utils/timeFormatter';
+import { formatHistoryEntryAsCsv } from '../utils/csvFormatter';
 
 interface HistoryProps {
   entries: HistoryEntry[];
@@ -32,6 +35,30 @@ function GradeBadge({ grade }: { grade: number | null }) {
   return <span className={colors[grade]}>{grade}</span>;
 }
 
+function CopyButton({ entry }: { entry: HistoryEntry }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(formatHistoryEntryAsCsv(entry));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="text-tn-muted hover:text-tn-blue transition-colors text-xs"
+      title="Copy to clipboard"
+    >
+      {copied ? <CheckIcon className="w-4 h-4" /> : <ClipboardDocumentIcon className="w-4 h-4" />}
+    </button>
+  );
+}
+
 export function History({ entries, onDelete, onClear }: HistoryProps) {
   if (entries.length === 0) return null;
 
@@ -57,6 +84,7 @@ export function History({ entries, onDelete, onClear }: HistoryProps) {
               <th className="text-center py-2 px-3">Time</th>
               <th className="text-center py-2 px-3">Grade</th>
               <th className="py-2 px-3"></th>
+              <th className="py-2 px-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -79,11 +107,15 @@ export function History({ entries, onDelete, onClear }: HistoryProps) {
                   <GradeBadge grade={entry.grade} />
                 </td>
                 <td className="py-2 px-3">
+                  <CopyButton entry={entry} />
+                </td>
+                <td className="py-2 px-3">
                   <button
                     onClick={() => onDelete(entry.id)}
-                    className="text-tn-muted hover:text-tn-red transition-colors text-xs"
+                    className="text-tn-muted hover:text-tn-red transition-colors"
+                    title="Delete"
                   >
-                    ×
+                    <XMarkIcon className="w-4 h-4" />
                   </button>
                 </td>
               </tr>

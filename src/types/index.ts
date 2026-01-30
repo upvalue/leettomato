@@ -44,6 +44,12 @@ export type AppAction =
   | { type: 'COMPLETE_GRADING' }
   | { type: 'RESET' };
 
+export interface AppSettings {
+  designThresholdMin: number;   // default 10
+  codingThresholdMin: number;   // default 20
+  soundEnabled: boolean;        // default false (opt-in)
+}
+
 export interface HistoryEntry {
   id: string;
   date: string;

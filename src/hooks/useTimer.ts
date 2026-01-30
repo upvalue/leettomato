@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface UseTimerOptions {
   warningThresholdMs: number;
+  onThresholdCrossed?: () => void;
 }
 
 interface UseTimerReturn {
@@ -12,14 +13,18 @@ interface UseTimerReturn {
   pause: () => void;
   reset: () => void;
   getElapsed: () => number;
+  setInitialOffset: (ms: number) => void;
 }
 
-export function useTimer({ warningThresholdMs }: UseTimerOptions): UseTimerReturn {
+export function useTimer({ warningThresholdMs, onThresholdCrossed }: UseTimerOptions): UseTimerReturn {
   const [elapsed, setElapsed] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const startTimeRef = useRef<number | null>(null);
   const accumulatedRef = useRef(0);
   const intervalRef = useRef<number | null>(null);
+  const thresholdFiredRef = useRef(false);
+  const onThresholdCrossedRef = useRef(onThresholdCrossed);
+  onThresholdCrossedRef.current = onThresholdCrossed;
 
   const getElapsed = useCallback(() => {
     if (isRunning && startTimeRef.current !== null) {
@@ -51,15 +56,26 @@ export function useTimer({ warningThresholdMs }: UseTimerOptions): UseTimerRetur
     }
     startTimeRef.current = null;
     accumulatedRef.current = 0;
+    thresholdFiredRef.current = false;
     setElapsed(0);
     setIsRunning(false);
+  }, []);
+
+  const setInitialOffset = useCallback((ms: number) => {
+    accumulatedRef.current += ms;
+    setElapsed(accumulatedRef.current);
   }, []);
 
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = window.setInterval(() => {
         if (startTimeRef.current !== null) {
-          setElapsed(accumulatedRef.current + (Date.now() - startTimeRef.current));
+          const now = accumulatedRef.current + (Date.now() - startTimeRef.current);
+          setElapsed(now);
+          if (!thresholdFiredRef.current && now > warningThresholdMs) {
+            thresholdFiredRef.current = true;
+            onThresholdCrossedRef.current?.();
+          }
         }
       }, 100);
     } else if (intervalRef.current !== null) {
@@ -84,5 +100,6 @@ export function useTimer({ warningThresholdMs }: UseTimerOptions): UseTimerRetur
     pause,
     reset,
     getElapsed,
+    setInitialOffset,
   };
 }
