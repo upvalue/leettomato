@@ -6,6 +6,13 @@ interface Props {
   problem: Problem;
 }
 
+function cleanDescription(desc: string): string {
+  return desc
+    .replace(/\n*(Example \d+:\s*\n*)+/g, "")
+    .replace(/\n*Constraints:\s*$/, "")
+    .trim();
+}
+
 export function ProblemDetail({ problem }: Props) {
   const leetcodeUrl = `https://leetcode.com/problems/${problem.slug}/`;
 
@@ -38,7 +45,7 @@ export function ProblemDetail({ problem }: Props) {
             Description
           </h2>
           <div className="text-fg-main whitespace-pre-wrap leading-relaxed">
-            {problem.description}
+            {cleanDescription(problem.description)}
           </div>
         </section>
       )}

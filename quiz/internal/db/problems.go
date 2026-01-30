@@ -16,11 +16,11 @@ type Problem struct {
 	Slug           string   `json:"slug"`
 	Title          string   `json:"title"`
 	Difficulty     string   `json:"difficulty"`
-	Description    string   `json:"description,omitempty"`
-	Examples       []any    `json:"examples,omitempty"`
-	Constraints    []string `json:"constraints,omitempty"`
-	Hints          []string `json:"hints,omitempty"`
-	Python3Snippet string   `json:"python3_snippet,omitempty"`
+	Description    string   `json:"description"`
+	Examples       []any    `json:"examples"`
+	Constraints    []string `json:"constraints"`
+	Hints          []string `json:"hints"`
+	Python3Snippet string   `json:"python3_snippet"`
 	Topics         []string `json:"topics"`
 }
 
@@ -186,6 +186,16 @@ func (d *DB) GetProblem(id int) (*Problem, error) {
 	json.Unmarshal([]byte(examplesJSON), &p.Examples)
 	json.Unmarshal([]byte(constraintsJSON), &p.Constraints)
 	json.Unmarshal([]byte(hintsJSON), &p.Hints)
+
+	if p.Examples == nil {
+		p.Examples = []any{}
+	}
+	if p.Constraints == nil {
+		p.Constraints = []string{}
+	}
+	if p.Hints == nil {
+		p.Hints = []string{}
+	}
 
 	// Fetch topics
 	rows, err := d.conn.Query(`

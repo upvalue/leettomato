@@ -9,7 +9,7 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:8080",
         headers: {
-          Authorization: "Basic " + Buffer.from(":changeme").toString("base64"),
+          Authorization: "Basic " + Buffer.from(":honk").toString("base64"),
         },
       },
     },
