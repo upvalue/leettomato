@@ -1,0 +1,23 @@
+# Database
+problems.db
+problems.db-shm
+problems.db-wal
+
+# Environment
+.env
+
+# Go binaries
+/quiz
+/grade
+/server
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Playwright screenshots
+.playwright-mcp/
+
+# OS
+.DS_Store

@@ -1,0 +1,10 @@
+services:
+  quiz:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - AUTH_PASSWORD=changeme
+      - LLM_BASE_URL=http://svc-litellm:4000/v1
+      - LLM_API_KEY=
+      - LLM_MODEL=claude-sonnet-4-5

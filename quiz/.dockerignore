@@ -1,0 +1,18 @@
+# flyctl launch added from .gitignore
+# Database
+**/problems.db
+
+# Environment
+**/.env
+
+# Go binary
+quiz
+
+# Frontend
+**/frontend/node_modules
+**/frontend/dist
+**/frontend/.vite
+
+# OS
+**/.DS_Store
+fly.toml

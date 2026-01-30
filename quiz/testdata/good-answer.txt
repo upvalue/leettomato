@@ -1,0 +1,13 @@
+Use a hash map to store complements.
+
+Approach:
+1. Create an empty hash map
+2. Iterate through the array with index i
+3. For each number nums[i], compute complement = target - nums[i]
+4. If complement exists in the hash map, return [hash_map[complement], i]
+5. Otherwise, store nums[i] -> i in the hash map
+
+Time complexity: O(n) - single pass through the array
+Space complexity: O(n) - hash map stores at most n elements
+
+This is optimal because we need to look at each element at least once.

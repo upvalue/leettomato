@@ -1,0 +1,9 @@
+Check every pair of numbers.
+
+For each element, loop through all other elements and see if they add up to target.
+Use two nested loops.
+
+Time complexity: O(n)
+Space complexity: O(1)
+
+This is the optimal solution.

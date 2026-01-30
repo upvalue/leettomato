@@ -1,0 +1,5 @@
+Use a hash map approach.
+
+Store each number's complement (target - num) as we iterate. Check if current number exists as a key before adding.
+
+This should work for all cases including duplicates like [3,3] with target 6.
