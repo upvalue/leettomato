@@ -17,17 +17,22 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: timer
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+          package_json_file: timer/package.json
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
+          cache-dependency-path: timer/pnpm-lock.yaml
 
       - run: pnpm install
 
@@ -37,7 +42,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: timer/dist
 
   deploy:
     environment:
