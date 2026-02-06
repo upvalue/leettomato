@@ -5,6 +5,7 @@ import { useTimer } from '../hooks/useTimer';
 import { useHistory } from '../hooks/useHistory';
 import { useSettings } from '../hooks/useSettings';
 import { useSoundEffects } from '../hooks/useSoundEffects';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ProblemInput } from './ProblemInput';
 import { Timer } from './Timer';
 import { TimerControls } from './TimerControls';
@@ -109,6 +110,7 @@ export function App() {
   const { history, addEntry, deleteEntry, clearHistory } = useHistory();
   const { settings, updateSetting, designThresholdMs, codingThresholdMs } = useSettings();
   const { playStart, playOverThreshold, playComplete } = useSoundEffects(settings.soundEnabled);
+  useDocumentTitle(phase, session.problem?.title ?? null);
 
   const designTimer = useTimer({
     warningThresholdMs: designThresholdMs,
