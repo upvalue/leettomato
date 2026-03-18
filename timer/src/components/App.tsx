@@ -139,7 +139,9 @@ export function App() {
     const overThreshold = designTimer.isOverThreshold;
     designTimer.pause();
     dispatch({ type: 'FINISH_DESIGN', time, overThreshold });
-  }, [designTimer]);
+    codingTimer.start();
+    playStart();
+  }, [designTimer, codingTimer, playStart]);
 
   const handleFinishCoding = useCallback(() => {
     const time = codingTimer.getElapsed();

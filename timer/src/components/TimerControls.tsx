@@ -21,7 +21,7 @@ export function TimerControls({
   const [offsetMin, setOffsetMin] = useState(0);
   const [offsetSec, setOffsetSec] = useState(0);
 
-  const showOffset = !isRunning;
+  const showOffset = true;
 
   const handleSetOffset = () => {
     const ms = (offsetMin * 60 + offsetSec) * 1000;
